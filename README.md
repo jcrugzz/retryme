@@ -3,7 +3,7 @@
 [![Build
 Status](https://travis-ci.org/jcrugzz/retryme.svg?branch=master)](https://travis-ci.org/jcrugzz/retryme)
 
-A more intuitive [`node-retry`][node-retry] which behaves more like [`async.retry`][async-retry]
+A more intuitive [`node-retry`][node-retry] which behaves more like [`async.retry`][async-retry]. Utilizes [`Backo`][backo] under the hood for backoff.
 
 ## Usage
 
@@ -63,3 +63,4 @@ op.attempt(next => {
 
 [node-retry]: https://github.com/tim-kos/node-retry
 [async-retry]: https://caolan.github.io/async/docs.html#retry
+[backo]: https://github.com/segmentio/backo
