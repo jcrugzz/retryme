@@ -1,6 +1,9 @@
 # retryme
 
-A more intuitive [`node-retry`] which behaves more like [`async.retry`]
+[![Build
+Status](https://travis-ci.org/jcrugzz/retryme.svg?branch=master)](https://travis-ci.org/jcrugzz/retryme)
+
+A more intuitive [`node-retry`][node-retry] which behaves more like [`async.retry`][async-retry]
 
 ## Usage
 
@@ -54,4 +57,9 @@ op.attempt(next => {
 
 ```
 
+## test
 
+`npm test`
+
+[node-retry]: https://github.com/tim-kos/node-retry
+[async-retry]: https://caolan.github.io/async/docs.html#retry
