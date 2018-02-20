@@ -1,13 +1,17 @@
 {
   "name": "retryme",
   "version": "1.0.0",
-  "description": "",
+  "description": "A more intuitive node-retry which behaves more like async.retry. Utilizes Backo under the hood for backoff.",
   "main": "index.js",
   "scripts": {
     "test": "nyc mocha"
   },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:jcrugzz/retryme.git"
+  },
   "keywords": [],
-  "author": "",
+  "author": "Jarrett Cruger <jcrugzz@gmail.com>",
   "license": "ISC",
   "dependencies": {
     "backo": "^1.1.0",
