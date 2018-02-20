@@ -24,14 +24,13 @@ var operation = new Retryme({
 operation.attempt((next) => {
   request('https://whatever.com', (err, res, body) => {
   if (err || res.statusCode !== 200) {
-    return next(err || new Error(`Invalid status code ${res.statusCode}));
+    return next(err || new Error(`Invalid status code ${res.statusCode}`));
   }
   next(null, body);
 }, (err, body) => {
   if (err) return /* handle me */
   console.dir(body);
 });
-
 ```
 
 *Now if we want to ignore certain types of errors, we pass a function for configuring those cases*
@@ -46,7 +45,7 @@ op.attempt(next => {
   request('https://whatever.com', (err, res, body) => {
     if (err || res.statusCode !== 200) {
     // any 404 error here will no longer be retried due to the function above
-    return next(err || new Error(`Invalid status code ${res.statusCode}));
+    return next(err || new Error(`Invalid status code ${res.statusCode}`));
   }
   next(null, body);
   });
