@@ -1,6 +1,6 @@
 const assume = require('assume');
 
-const performRetryme = require('../await');
+const awaitRetryme = require('../await');
 const retry = require('./fixtures/retry');
 
 describe('await-retryme', function () {
@@ -28,25 +28,16 @@ describe('await-retryme', function () {
   }
 
   it('succeeds the 1st time with no retries', async () => {
-    await performRetryme({
-      retry,
-      attempt: mockAttempt(0)
-    });
+    await awaitRetryme(retry, mockAttempt(0));
   });
 
   it('fails twice and passes in the last attempt', async () => {
-    await performRetryme({
-      retry,
-      attempt: mockAttempt(2)
-    });
+    await awaitRetryme(retry, mockAttempt(2));
   });
 
   it('fails after 3 attempts with error', async () => {
     try {
-      await performRetryme({
-        retry,
-        attempt: mockAttempt(3, true)
-      });
+      await awaitRetryme(retry, mockAttempt(3, true));
     } catch (e) {
       assume(e.message).equals(`mock attempt`);
 

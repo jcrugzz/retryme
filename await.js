@@ -3,22 +3,18 @@ const debug = require('diagnostics')('retryme');
 
 /**
  * Wrap up `retryme` with thenables to support async/await
- * @param {Object} opts Options for configuration
- * @param {Object} opts.retry configurations for retryme
- * @param {String} opts.message Description of retryable operations to assemble the logs
- * @param {Function} opts.attempt The real async function which will be retried
- * @param {Function} [opts.ignore] Optional ignore function for `retryme` to terminate retrying when it meets the condition
+ * @param {Object} retries configurations for retryme
+ * @param {Function} attempt The real async function which will be retried
+ * @param {Function} ignore Optional ignore function for `retryme` to terminate retrying when it meets the condition
  *
  * @returns {Promise} A Promise instance represents the result of function execution after retries
  *
  * @public
  */
-module.exports = function performRetryme(opts) {
-  const { retry, attempt, ignore } = opts;
-
+module.exports = function awaitRetryme(retries, attempt, ignore) {
   return {
     then: (fulfill, reject) => {
-      const operation = new Retryme(retry, ignore);
+      const operation = new Retryme(retries, ignore);
 
       debug('Start retries with awaiting async attempt function');
 
