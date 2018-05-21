@@ -65,9 +65,9 @@ op.attempt(next => {
 
 Retryme now supports `async/await`. It accepts three arguments:
 
-- `retry`: The configuration for create a new [`retryme` instance][retryme-instance].
+- `retry`: The configuration for create a new [retryme instance][retryme-instance].
 - `attempt`: The real `async` function which will be retried with `await`.
-- `ignore`: The `ignore` function also for setup [`retryme` instance][retryme-instance] to terminate retries.
+- `ignore`: The `ignore` function also for setup [retryme instance][retryme-instance] to terminate retries.
 
 A simple example of how to use it is as follows:
 
