@@ -1,8 +1,7 @@
-const retry = require('./');
+const retry = require('../');
 const assume = require('assume');
 
 describe('Retryme', function () {
-
   it('should retry twice before failure', function (done) {
     const op = retry.op({ retries: 2 });
     let called = 0;
@@ -36,3 +35,4 @@ describe('Retryme', function () {
     });
   });
 });
+

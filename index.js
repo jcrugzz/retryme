@@ -21,7 +21,7 @@ function Retryme(opts, fn) {
 Retryme.prototype.attempt = function (action, fn) {
   const self = this;
 
-  debug('executing action function')
+  debug('executing action function');
   action(once(function next(err) {
     if (!err || err && self.ignore(err)) return fn.apply(this, arguments);
     self.errors.push(err);
@@ -53,3 +53,4 @@ Retryme.op = function operation(opts, fn) {
 };
 
 module.exports = Retryme;
+
