@@ -98,4 +98,4 @@ async function top-caller() {
 [node-retry]: https://github.com/tim-kos/node-retry
 [async-retry]: https://caolan.github.io/async/docs.html#retry
 [backo]: https://github.com/segmentio/backo
-[retryme-instance]: https://github.com/jcrugzz/retryme#usage/#regular-usage 
+[retryme-instance]: https://github.com/jcrugzz/retryme#regular-usage 
