@@ -105,7 +105,7 @@ async function main() {
 }
 
 // it also supports thenables
-async function top-caller() {
+async function main() {
   await op.async(() => {
     return {
       then: (f, r) => {
