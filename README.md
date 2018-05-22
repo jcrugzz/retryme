@@ -69,24 +69,43 @@ A simple example of how to use it is as follows:
 
 ```js
 
+// example of calling the method for async functions returning Promises.
+const readFileAsync = require('util').promisify(require('fs').readFile);
 const Retryme = require('retryme');
 
-const op = new Retryme({
-  retries: 2,
-  min: 50,
-  max: 10000
-}, some_ignore_function_if_exists);
+async function main() {
+  const op = new Retryme({
+    retries: 2,
+    min: 50,
+    max: 10000
+  }, some_ignore_function_if_exists);
 
-// example of calling the method for async attempt functions
-async function top-caller() {
-  await op.async(async () => {
-    return new Promise((r, f) => {
-      // real functionality happens here
-    });
-  });
+  // Wrap a simple file read with retries.
+  try {
+    const fileContent = await op.async(() => readFileAsync(__dirname + '/index.js'))
+  } catch(err) {
+    console.log('error after 2 attempts');
+    console.error(err);
+  }
 }
 
-// also support thenables
+
+// it supports async functions
+async function foo(bad) {
+  if (!bad) return 'bar';
+  throw Error('what happened');
+}
+
+async function main() {
+  const op = new Retryme();
+  try {
+    const result = await op.async(() => foo());
+  } catch(err) {
+    console.error(err);
+  }
+}
+
+// it also support thenables
 async function top-caller() {
   await op.async(() => {
     return {
