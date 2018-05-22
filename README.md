@@ -5,7 +5,7 @@ Status](https://travis-ci.org/jcrugzz/retryme.svg?branch=master)](https://travis
 
 A more intuitive [`node-retry`][node-retry] which behaves more like [`async.retry`][async-retry]. Utilizes [`Backo`][backo] under the hood for backoff.
 
-Retryme also supports `async/await` now with wrapping up the `retryme` within thenable wrappers.
+Retryme also supports `async/await` now for retrying async attempt functions.
 
 ## Usage
 
