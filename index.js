@@ -34,6 +34,32 @@ Retryme.prototype.attempt = function (action, fn) {
   }));
 };
 
+Retryme.prototype.async = function (asyncfn) {
+  return new Promise((fulfill, reject) => {
+    debug('Start retries with awaiting async attempt function');
+
+    this.attempt(
+      async next => {
+        try {
+          const body = await asyncfn();
+          return next(null, body);
+        } catch (err) {
+          debug('error happens, gonna retry');
+          return next(err);
+        }
+      }, (error, body) => {
+        if (error) {
+          debug('out of retries, will error out.');
+
+          return reject(error);
+        }
+
+        debug('retry succeeds');
+        fulfill(body);
+      });
+  });
+};
+
 Retryme.prototype._error = function _error(fn) {
   const error = this.errors.pop();
   return fn(

@@ -63,32 +63,40 @@ op.attempt(next => {
 
 ### `Async/await` Support
 
-Retryme now supports `async/await`. It accepts three arguments:
-
-- `retry`: The configuration for create a new [retryme instance][retryme-instance].
-- `attempt`: The real `async` function which will be retried with `await`.
-- `ignore`: The `ignore` function also for setup [retryme instance][retryme-instance] to terminate retries.
+Retryme now supports `async/await` by providing `.async` function to retry async attempt functions.
 
 A simple example of how to use it is as follows:
 
 ```js
-const awaitRetryme = require('retryme/await');
 
-function some_async_func(val) {
-  return then: (resolve, reject) => {
-    if (some_condition) return reject(some_error);
-    resolve(val);
-  }
-}
+const Retryme = require('retryme');
 
-// example of pass-in params.
+const op = new Retryme({
+  retries: 2,
+  min: 50,
+  max: 10000
+}, some_ignore_function_if_exists);
+
+// example of calling the method for async attempt functions
 async function top-caller() {
-  await awaitRetryme({
-    retries: 3,
-    min: 5,
-    max: 10
-  }, some_async_func(some_value), some_ignore_function_if_exists);
+  await op.async(async () => {
+    return new Promise((r, f) => {
+      ...
+    });
+  });
 }
+
+// also support thenables
+async function top-caller() {
+  await op.async(() => {
+    return {
+      then: (f, r) => {
+        ...
+      }
+    };
+  });
+}
+
 ```
 
 ## test
@@ -98,4 +106,4 @@ async function top-caller() {
 [node-retry]: https://github.com/tim-kos/node-retry
 [async-retry]: https://caolan.github.io/async/docs.html#retry
 [backo]: https://github.com/segmentio/backo
-[retryme-instance]: https://github.com/jcrugzz/retryme#regular-usage 
+
