@@ -82,13 +82,12 @@ async function main() {
 
   // Wrap a simple file read with retries.
   try {
-    const fileContent = await op.async(() => readFileAsync(__dirname + '/index.js'))
+    const fileContent = await op.async(() => readFileAsync(__dirname + '/index.js'));
   } catch(err) {
     console.log('error after 2 attempts');
     console.error(err);
   }
 }
-
 
 // it supports async functions
 async function foo(bad) {
@@ -105,7 +104,7 @@ async function main() {
   }
 }
 
-// it also support thenables
+// it also supports thenables
 async function top-caller() {
   await op.async(() => {
     return {
