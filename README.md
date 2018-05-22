@@ -81,7 +81,7 @@ const op = new Retryme({
 async function top-caller() {
   await op.async(async () => {
     return new Promise((r, f) => {
-      ...
+      // real functionality happens here
     });
   });
 }
@@ -91,7 +91,7 @@ async function top-caller() {
   await op.async(() => {
     return {
       then: (f, r) => {
-        ...
+        // real functionality happens here
       }
     };
   });
