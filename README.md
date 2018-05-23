@@ -91,14 +91,14 @@ async function main() {
 
 // it supports async functions
 async function foo(bad) {
-  if (!bad) return 'bar';
+  if (bad !== 'hola') return 'bar';
   throw Error('what happened');
 }
 
 async function main() {
   const op = new Retryme();
   try {
-    const result = await op.async(() => foo());
+    const result = await op.async(() => foo('hello'));
   } catch(err) {
     console.error(err);
   }

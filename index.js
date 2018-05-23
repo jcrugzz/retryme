@@ -39,14 +39,15 @@ Retryme.prototype.async = function (asyncfn) {
     debug('Start retries with awaiting async attempt function');
 
     this.attempt(
-      async next => {
-        try {
-          const body = await asyncfn();
-          return next(null, body);
-        } catch (err) {
-          debug('error happens, gonna retry');
-          return next(err);
-        }
+      next => {
+        return asyncfn()
+          .then(body => {
+            next(null, body);
+          }, err => {
+            debug('error happens, gonna retry');
+
+            next(err);
+          });
       }, (error, body) => {
         if (error) {
           debug('out of retries, will error out.');

@@ -27,9 +27,9 @@ describe('Retryme', function () {
   });
 
   it('should ignore errors defined by the given function', function (done) {
-    const op = retry.op((err) => err.message.includes('whoops'));
+    const operation = retry.operation((err) => err.message.includes('whoops'));
     let called = 0;
-    op.attempt(next => {
+    operation.attempt(next => {
       setImmediate(() => {
         called++;
         next(new Error('whoops'));
