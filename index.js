@@ -21,7 +21,7 @@ function Retryme(opts, fn) {
 Retryme.prototype.attempt = function (action, fn) {
   const self = this;
 
-  debug('executing action function')
+  debug('executing action function');
   action(once(function next(err) {
     if (!err || err && self.ignore(err)) return fn.apply(this, arguments);
     self.errors.push(err);
@@ -32,6 +32,33 @@ Retryme.prototype.attempt = function (action, fn) {
     debug('retrying another attempt after backoff');
     setTimeout(() => self.attempt(action, fn), self.backo.duration());
   }));
+};
+
+Retryme.prototype.async = function (asyncfn) {
+  return new Promise((fulfill, reject) => {
+    debug('Start retries with awaiting async attempt function');
+
+    this.attempt(
+      next => {
+        return asyncfn()
+          .then(body => {
+            next(null, body);
+          }, err => {
+            debug('error happens, gonna retry');
+
+            next(err);
+          });
+      }, (error, body) => {
+        if (error) {
+          debug('out of retries, will error out.');
+
+          return reject(error);
+        }
+
+        debug('retry succeeds');
+        fulfill(body);
+      });
+  });
 };
 
 Retryme.prototype._error = function _error(fn) {
@@ -53,3 +80,4 @@ Retryme.op = function operation(opts, fn) {
 };
 
 module.exports = Retryme;
+

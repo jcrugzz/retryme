@@ -4,7 +4,10 @@
   "description": "A more intuitive node-retry which behaves more like async.retry. Utilizes Backo under the hood for backoff.",
   "main": "index.js",
   "scripts": {
-    "test": "nyc mocha"
+    "lint:fix": "eslint -c .eslintrc --fix *.js test/**/*.test.js",
+    "pretest": "npm run lint:fix",
+    "test:mocha": "mocha test/*.test.js",
+    "test": "nyc --reporter=text --reporter=json-summary npm run test:mocha"
   },
   "repository": {
     "type": "git",
@@ -20,8 +23,13 @@
     "one-time": "0.0.4"
   },
   "devDependencies": {
-    "assume": "^1.5.1",
-    "mocha": "^3.5.0",
-    "nyc": "^11.1.0"
+    "assume": "^2.0.1",
+    "eslint": "^4.19.1",
+    "eslint-config-godaddy": "^2.1.0",
+    "eslint-config-godaddy-es5": "^2.1.0",
+    "eslint-plugin-json": "^1.2.0",
+    "eslint-plugin-mocha": "^4.12.1",
+    "mocha": "^5.1.1",
+    "nyc": "^11.8.0"
   }
 }
