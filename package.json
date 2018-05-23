@@ -1,6 +1,6 @@
 {
   "name": "retryme",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A more intuitive node-retry which behaves more like async.retry. Utilizes Backo under the hood for backoff.",
   "main": "index.js",
   "scripts": {
